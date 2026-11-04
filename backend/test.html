@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Trackify Live connection..</h2>
+
+    <input type="text" placeholder="Enter message"  id="message"/>
+
+    <button onclick="sendMessage()">Send</button>
+
+     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
+     <script>
+        const socket = io("http://localhost:3000");
+
+        socket.on("connect",() => {
+          console.log("socket connected frontend", socket.id);
+        });
+
+        function sendMessage() {
+            const message = document.getElementById("message").value;
+
+            socket.emit("sendMessage", message);
+        }
+
+        socket.on("receiveMessage", (message) => {
+               const li = document.createElement("li");
+               li.innerText = message;
+               document.getElementById("messages").appendChild(li);
+        });
+     </script>
+
+    <h3>Messages:</h3>
+    <ul id="messages"></ul>
+</body>
+</html>
