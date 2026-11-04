@@ -16,7 +16,7 @@ const roomId = "Room A";
   useEffect(() => {
    // const socket = io("http://localhost:3000");
    
-   const socket = io("https://trackify-app1.vercel.app", {
+   const socket = io("https://trackify-app-3.vercel.app", {
   path: "/api/socket-io/socket.io",
   transports: ["websocket"],
   reconnection: false,
@@ -28,7 +28,7 @@ const roomId = "Room A";
     socket.on("connect", () => {
       console.log("connected ", socket.id);
     });
-    
+
     socket.on("connect_error", (error) => {
   console.log("CONNECTION ERROR:", error.message);
 });
